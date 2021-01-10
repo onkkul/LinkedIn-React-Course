@@ -1,41 +1,61 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React, { Component } from "react";
+import ReactDOM from "react-dom"
+
 
 let bookList = [
-	{"title": "Hunger", "author": "Roxane Gay", "pages": 320},
-	{"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
-	{"title": "White Teeth", "author": "Zadie Smith", "pages": 480},
-	{"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304}
-]
-
-const Book = ({title, author, pages}) => {
-	return (
-		<section>
-			<h2>{title}</h2>
-			<p>by: {author}</p>
-			<p>Pages: {pages} pages</p>
-		</section>
-	)
+  {"title":"Vapurza", "Auther":"V. P. Kale"},
+  {"title":"Batatyachi Chal", "Auther":"P. L. Deshpande"},
+  {"title":"Yayati", "Auther":"V. S. Khandekar" },
+] 
+class BookComponent extends Component{
+	render(){
+    return(
+      <div>
+	    	<h1>{this.props.title}</h1>
+    		<h2>{this.props.Auther}</h2>
+      </div>
+    )
+	}
 }
 
-const Library = ({books}) => {
-	return (
-		<div>
-			{books.map(
-				(book, i) => 
-					<Book 
-						key={i}
-						title={book.title} 
-						author={book.author} 
-						pages={book.pages}/>
-			)}
-		</div>
-	)
+class LibraryComponent extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      'isOpen':false
+    }
+  }
+	render(){
+    return(
+      <div>
+        <h1>The Library is {this.state.isOpen ? 'Open':'Closed'}</h1>,
+			  {this.props.books.map(
+          (book, indx) => <BookComponent key={indx} title={book.title} Auther={book.Auther} />
+        )}
+  		</div>
+    )
+	}
 }
-
-
-
-render(
-	<Library books={bookList}/>, 
-	document.getElementById('root')
+ReactDOM.render(
+  <LibraryComponent books={bookList}/>,
+  document.getElementById("root")
 )
+
+
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import reportWebVitals from './reportWebVitals';
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -1,54 +1,71 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React, { Component } from "react";
+import ReactDOM from "react-dom"
+
 
 let bookList = [
-	{"title": "Hunger", "author": "Roxane Gay", "pages": 320},
-	{"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
-	{"title": "White Teeth", "author": "Zadie Smith", "pages": 480},
-	{"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304}
-]
-
-const Book = ({title, author, pages}) => {
-	return (
-		<section>
-			<h2>{title}</h2>
-			<p>by: {author}</p>
-			<p>Pages: {pages} pages</p>
-		</section>
-	)
-}
-
-class Library extends React.Component {
-	
-	state = { open: false }
-
-	toggleOpenClosed = () => {
-		this.setState(prevState => ({
-			open: !prevState.open
-		}))
-	}
-	render() {
-		const { books } = this.props
-		return (
-			<div>
-				<h1>The library is {this.state.open ? 'open' : 'closed'}</h1>
-				<button onClick={this.toggleOpenClosed}>Change</button>
-				{books.map(
-					(book, i) => 
-						<Book 
-							key={i}
-							title={book.title} 
-							author={book.author} 
-							pages={book.pages}/>
-				)}
-			</div>
-		)
+  {"title":"Vapurza", "Auther":"V. P. Kale"},
+  {"title":"Batatyachi Chal", "Auther":"P. L. Deshpande"},
+  {"title":"Yayati", "Auther":"V. S. Khandekar" },
+] 
+class BookComponent extends Component{
+	render(){
+    return(
+      <div>
+	    	<h1>{this.props.title}</h1>
+    		<h2>{this.props.Auther}</h2>
+        <h2>{this.props.freeFood? "Free food today":"Free Reading today"}</h2>
+      </div>
+    )
 	}
 }
 
+class LibraryComponent extends Component{
+  
+  state = {
+    isOpen:false,
+    isFood:false
+  }
 
+  changeState = () => {
+    this.setState(
+      {
+        isOpen : !this.state.isOpen,
+        isFood : !this.state.isFood
+      } )
+  }
 
-render(
-	<Library books={bookList}/>, 
-	document.getElementById('root')
+	render(){
+    return(
+      <div>
+        <h1>The Library is {this.state.isOpen ? 'Open':'Closed'}</h1>,
+			  {this.props.books.map(
+          (book, indx) => <BookComponent key={indx} title={book.title} Auther={book.Auther} freeFood={this.state.isFood}/>
+        )}
+        <button onClick={this.changeState}> {this.state.isOpen ? 'Open':'Close'} Library </button>
+  		</div>
+    )
+	}
+}
+ReactDOM.render(
+  <LibraryComponent books={bookList}/>,
+  document.getElementById("root")
 )
+
+
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import reportWebVitals from './reportWebVitals';
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
