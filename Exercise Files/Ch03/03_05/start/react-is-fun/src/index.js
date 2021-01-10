@@ -1,46 +1,109 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import React, { Component } from "react";
+import ReactDOM from "react-dom"
 
-let skiData = {
-	total: 50,
-	powder: 20,
-	backcountry: 10,
-	goal: 100
+let leetCode = {
+  easy:50,
+  medium:20,
+  hard:10
 }
 
-class SkiDayCounter extends Component {
-	getPercent = decimal => {
-		return decimal * 100 + '%'
-	}
-	calcGoalProgress = (total, goal) => {
-		return this.getPercent(total/goal)
-	}
-	render() {
-		const {total, powder, backcountry, goal} = this.props
-		return (
-			<section>
-				<div>
-					<p>Total Days: {total}</p>
-				</div>
-				<div>
-					<p>Powder Days: {powder}</p>
-				</div>
-				<div>
-					<p>Backcountry Days: {backcountry}</p>
-				</div>
-				<div>
-					<p>Goal Progress: {this.calcGoalProgress(total, goal)}</p>
-				</div>
-			</section>
-		)
-	}
+let hackerRank = {
+  easy:100,
+  medium:30,
+  hard:1
 }
 
-render(
-	<SkiDayCounter 
-		total={skiData.total}
-		powder={skiData.powder}
-		backcountry={skiData.backcountry}
-		goal={skiData.goal}/>, 
-	document.getElementById('root')
+let codeChef = {
+  easy:135,
+  medium:56,
+  hard:3
+}
+
+const function_getPercentage = parameter_1 =>{
+  return parameter_1*100/300 + "%"
+}
+
+const function_codeComponent = ({leetCode, hackerRank, codeChef}) => {
+  return (
+    <section>
+      <div>
+        <h1>Leet Code</h1>
+        <h2> {leetCode.easy} </h2>
+        <h2> {leetCode.medium} </h2>
+        <h2> {leetCode.hard} </h2>
+      </div>
+      <div>
+        <h1>Hacker Rank</h1>
+        <h2> {hackerRank.easy} </h2>
+        <h2> {hackerRank.medium} </h2>
+        <h2> {hackerRank.hard} </h2>
+      </div>
+      <div>
+        <h1>Code Chef</h1>
+        <h2> {codeChef.easy} </h2>
+        <h2> {codeChef.medium} </h2>
+        <h2> {codeChef.hard} </h2>
+      </div>
+      <div>
+        <h1>Total percantage:</h1>
+        <h2>{this.getPercentage(leetCode.easy)}</h2>
+      </div>
+    </section>
+  )  
+}
+// class CodeComponent extends Component{
+  
+//   render(){
+//     const {leetCode, hackerRank, codeChef} = this.props
+//     return (
+//       <section>
+//         <div>
+//           <h1>Leet Code</h1>
+//           <h2> {leetCode.easy} </h2>
+//           <h2> {leetCode.medium} </h2>
+//           <h2> {leetCode.hard} </h2>
+//         </div>
+//         <div>
+//           <h1>Hacker Rank</h1>
+//           <h2> {hackerRank.easy} </h2>
+//           <h2> {hackerRank.medium} </h2>
+//           <h2> {hackerRank.hard} </h2>
+//         </div>
+//         <div>
+//           <h1>Code Chef</h1>
+//           <h2> {codeChef.easy} </h2>
+//           <h2> {codeChef.medium} </h2>
+//           <h2> {codeChef.hard} </h2>
+//         </div>
+//         <div>
+//           <h1>Total percantage:</h1>
+//           <h2>{this.getPercentage(leetCode.easy)}</h2>
+//         </div>
+//       </section>
+//     )
+//   }
+// }
+
+ReactDOM.render(
+  <function_codeComponent leetCode={leetCode} hackerRank={hackerRank} codeChef={codeChef}/>,
+  document.getElementById("root")
 )
+
+
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import reportWebVitals from './reportWebVitals';
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
