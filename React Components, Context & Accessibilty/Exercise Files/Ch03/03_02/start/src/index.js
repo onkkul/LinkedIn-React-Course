@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
 
+let Description = [
+  {id:1, Error: "Syntax Erros", meaning : "Errors Due to improper grammer of language"},
+  {id:2, Error: "Runtime Errors", meaning : "Errors due to improper bonding of variable to memory"},
+  {id:3, Error: "Compilation Error", meaning :"Errors due to failure in compiling the program"}
+]
 
 const NavigationComponent = () => {
     return(
@@ -13,6 +18,21 @@ const NavigationComponent = () => {
       </React.Fragment>
     )
 }
+
+const DescriptionComponent = (props) => {
+  return (
+    <dl >
+      {props.Description.map(element =>(
+        <React.Fragment key = {element.id}>
+          <dt> {element.Error} </dt>
+          <dd> {element.meaning}</dd>
+        </React.Fragment>
+       ) )  }
+    </dl>
+  )  
+}
+
+
 class WebsiteComponent extends Component{
   constructor (props){
     super(props)
@@ -20,12 +40,10 @@ class WebsiteComponent extends Component{
       property_1: "This is a custom property"
     }
   }
-
   render(){
     return(
-      <header>
-        <nav>   <NavigationComponent />   </nav>   
-      </header>
+      <DescriptionComponent Description={Description}/>
+      
     )
   }
 }
