@@ -2,38 +2,23 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
 
-const NowEating = (props) =>{
-  return (
-  <div>
-    <h1>{props.meal}</h1>
-    <h2>{props.side === "" ? "":props.side}</h2>
-  </div>
-  )
+const IsElegible = (age) =>{
+  return age >= 18 ? true: false
 }
-class Menu extends Component{
-  constructor (props){
-    super(props)
-    this.state = {
-      meal:"Rice Bowl"
-    }
-  }
 
-  addSides = () => {
-    this.setState(previousState => {
-      return {"meal" : previousState.meal,
-      "side":"salad"}}
-      )
-  }
-  render(){
+class Display extends Component{
+  render(props){
     return(
-      <div>
-        <NowEating meal={this.state.meal} side={this.state.side}/>,
-        <button onClick={this.addSides}> Add side </button>
-      </div>
+      this.props.isEligible === true ? 
+        React.Children.only(this.props.children):
+        null
     )
   }
 }
+
 ReactDOM.render(
-  <Menu data="SomeData"/>,
+  <Display isEligible={IsElegible(20)}>
+    <h1>You can vote </h1>
+  </Display>,
   document.getElementById('root')
 )
