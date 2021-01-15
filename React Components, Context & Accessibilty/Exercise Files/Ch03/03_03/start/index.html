@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+        <script src="https://unpkg.com/react/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    </head>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class MountingLifecycle extends React.Component {
+        constructor() {
+          // before component is mounted
+        }
+        getDerivedStateFromProps() {
+          // invoked right after component is constructed
+        }
+        render() {
+          // when first mounted
+        }
+        componentDidMount() {
+          // right after component is mounted
+        }
+      }
+
+      class UpdatingLifecycle extends React.Component {
+        getDerivedStateFromProps() {
+          // invoked right after component is receives new props
+        }
+        shouldComponentUpdate() {
+          // if this returns false, then render() and componentDidUpdate() won't
+          //   be called
+        }
+        render() {
+          // when data changes
+        }
+        getSnapshotBeforeUpdate() {
+          // right before most recently rendered output is rendered
+        }
+        componentDidUpdate() {
+          // invoked right after update
+        }
+      }
+
+      class UnmountingLifecycle extends React.Component {
+        componentWillUnmount() {
+          // invoked right before a component is unmounted
+        }
+      }
+
+    </script>
+</html>

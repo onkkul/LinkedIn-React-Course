@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+        <script src="https://unpkg.com/react/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    </head>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      const DataComponent = (ComposedComponent, url) =>
+        class DataComponent extends React.Component {
+          constructor(props) {
+            super(props)
+            this.state = {
+              data: [],
+              loading: false,
+              loaded: false
+            }
+          }
+          componentDidMount() {
+            this.setState({loading: true})
+            fetch(url)
+              .then(response => response.json())
+              .then(data =>
+                this.setState({
+                  loaded: true,
+                  loading: false,
+                  data
+                })
+              )
+          }
+          render() {
+            return(
+              <div>
+                {this.state.loaded
+                  ? <ComposedComponent {...this.state} {...this.props} />
+                  : <div>Loading</div>}
+              </div>
+            )
+          }
+        }
+
+      const PeopleList = ({data}) =>
+        <ol>
+          {data.results.map((person, i) => {
+            const {first, last} = person.name
+            return (
+              <li key={i}>{first} {last}</li>
+            )
+          })}
+        </ol>
+
+      const RandomMeUsers = DataComponent(
+        PeopleList,
+        "https://randomuser.me/api?results=10"
+      )
+
+      ReactDOM.render(
+        <RandomMeUsers />,
+        document.getElementById('root')
+      )
+
+    </script>
+</html>

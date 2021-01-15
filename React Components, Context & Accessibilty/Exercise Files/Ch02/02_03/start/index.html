@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+        <script src="https://unpkg.com/react/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    </head>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class EncouragementForm extends React.Component {
+        handleSubmit = e => {
+          alert(this.input.value)
+          e.preventDefault()
+        }
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                Send an Encouraging Message:
+                <input type="text" ref={input => this.input = input } />
+              </label>
+              <button>
+                Submit
+              </button>
+            </form>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <EncouragementForm />,
+        document.getElementById('root')
+      )
+
+    </script>
+</html>

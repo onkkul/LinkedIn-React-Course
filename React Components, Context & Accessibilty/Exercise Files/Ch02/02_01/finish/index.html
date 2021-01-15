@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+        <script src="https://unpkg.com/react/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    </head>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      const Display = ({ifTruthy=true, children}) =>
+        (ifTruthy)
+          ? React.Children.only(children)
+          : null
+
+      const age = 12
+
+      ReactDOM.render(
+        <Display ifTruthy={age >= 18}>
+          <h1>You can vote!</h1>
+        </Display>,
+        document.getElementById('root')
+      )
+
+    </script>
+</html>

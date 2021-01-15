@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+        <script src="https://unpkg.com/react/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+        <style>
+          nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: cadetblue;
+          }
+          nav > a {
+            color: coral;
+            font-size: 30px;
+          }
+        </style>
+    </head>
+    <div id="root"></div>
+    <script type="text/babel">
+      const skiDictionary = [
+        { id: 1, name: "Send", definition: "To throw one's body off of a cliff or rock" },
+        { id: 2, name: "Chowder", definition: "Snow or powder that has been skied" }
+      ]
+
+      const NavItems = () =>
+        <>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/services">Services</a>
+          <a href="/contact">Contact</a>
+        </>
+
+      const App = (props) => {
+        return (
+          <dl>
+            {props.skiDictionary.map(term => (
+              <React.Fragment key={term.id}>
+                <dt>{term.name}</dt>
+                <dd>{term.definition}</dd>
+              </React.Fragment>  
+            ))}
+          </dl>
+        )
+      }
+
+      ReactDOM.render(
+        <App skiDictionary={skiDictionary}/>,
+        document.getElementById('root')
+      )
+
+    </script>
+</html>
