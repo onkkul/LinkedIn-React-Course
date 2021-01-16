@@ -13,9 +13,13 @@ class ContextProvider extends Component{
       location: "Near Me"
     }
   }
+
   render(){
     return(
-      <Context.Provider value={{state: this.state}}>
+      <Context.Provider value={{
+        state: this.state,
+        changeStatus: () =>{   this.setState({isOpen:!this.state.isOpen})  }
+        }}>
         {this.props.children}
       </Context.Provider>
     )
@@ -28,10 +32,14 @@ class Skii extends Component{
       <div>
         <Context.Consumer>
           {(context) => (
-            <ul>
-              <li> Capacity: {context.state.capacity} </li>,
-              <li> Location : {context.state.location} </li>
-            </ul>
+            <div>
+              <ul>
+                <li> Capacity: {context.state.capacity} </li>,
+                <li> Location : {context.state.location} </li>
+              </ul>
+              <button onClick={context.changeStatus}>{context.state.isOpen === true? "Close Resort":'Open Resort'}</button>
+            </div>
+            
           )}
         </Context.Consumer>
       </div>
@@ -52,11 +60,7 @@ class Activities extends Component{
 class Resort extends Component{
   constructor(props){
     super(props)
-    this.state = {
-      isOpen: true,
-      capacity: 30,
-      location: "Near Me"
-    }
+    this.state = { resortState:"Empty"    }
   }
 
   render(){
@@ -67,13 +71,17 @@ class Resort extends Component{
         </div>
       </ContextProvider>
     )
+    // if (this.props.isOpen === true){
+    //   return (<Activities capacity={this.state.capacity} location={this.state.location}/>)
+    // }
+    // else{
+    //   return <h1>Resort is closed</h1>
+    // }
   }
 }
 
 Resort.propTypes = {
-  isOpen : PropTypes.bool,
-  capacity: PropTypes.number,
-  location:PropTypes.string,
+  resortState:PropTypes.string,
 }
 
 ReactDOM.render(

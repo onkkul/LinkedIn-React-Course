@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom"
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const DataComponent = ({ComposedComponent, url}) =>
   class DataComponent extends Component{
