@@ -4,10 +4,10 @@ import './App.css'
 class App extends Component {
   render() {
     return (
-      <div>
+      <header>
         <a href="#home" />
         <img src="/img/is-an-image.jpg" alt="" />
-      </div>
+      </header>
     )
   }
 }
